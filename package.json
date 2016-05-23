@@ -1,0 +1,33 @@
+{
+  "name": "lazy-load-example",
+  "version": "0.1.0",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "config": "^1.8.1",
+    "express": "^4.10.2",
+    "morgan": "^1.5.0"
+  },
+  "devDependencies": {
+    "animate.css": "^3.5.1",
+    "autoprefixer-loader": "^3.2.0",
+    "babel-core": "^5.8.35",
+    "babel-loader": "^5.4.0",
+    "css-loader": "^0.23.1",
+    "html-loader": "^0.4.3",
+    "lodash": "^4.6.1",
+    "ractive": "^0.7.3",
+    "ractive-loader": "^0.5.6",
+    "ractive-route": "github:martinkolarik/ractive-route",
+    "ractive-transitions-fade": "^0.3.1",
+    "ractive-transitions-slide": "^0.4.0",
+    "request-promise": "^3.0.0",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-middleware": "^1.5.1",
+    "xhttp": "0.0.8"
+  }
+}

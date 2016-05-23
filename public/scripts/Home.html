@@ -1,0 +1,93 @@
+<div intro="animate:fadeIn">
+  <div class="card p-t-2">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+
+          <div class="input-group input-group-sm p-b-2">
+            <input type="text" class="form-control" value="{{search}}">
+            {{#if search_results.length}}
+              <span class="input-group-addon">
+                {{search_index + 1}} of {{search_results.length}}
+                {{#loading}}<i class="fa fa-spinner fa-pulse"></i>{{/loading}}
+              </span>
+            {{/if}}
+            <div class="input-group-btn">
+              <button class="btn btn-default"
+                      on-click="subtract('search_index')"
+                      {{^search_results && search_index > 0}} disabled="disabled"{{/search_results}}>
+                <i class="fa fa-chevron-up"></i>
+              </button>
+            </div>
+            <div class="input-group-btn">
+              <button class="btn btn-default"
+                      on-click="add('search_index')"
+                      {{^search_results && search_index < search_results.length - 1}} disabled="disabled"{{/search_results}}>
+                <i class="fa fa-chevron-down"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-9">
+          <button class="btn btn-sm btn-default"><i class="fa fa-copy"></i> Save</button>
+          <button class="btn btn-sm btn-default">ACTIONS <i class="fa fa-caret-down"></i></button>
+          <button class="btn btn-sm btn-default"><i class="fa fa-refresh"></i> Refresh</button>
+          <button class="btn btn-sm btn-default"><i class="fa fa-gear"></i> Customize</button>
+        </div>
+      </div>
+    </div>
+
+    {{#if !data && loading}}
+      <h5 class="text-info text-xs-center">
+        <i class="fa fa-spinner fa-pulse"></i>
+        Loading...
+      </h5>
+    {{/if}}
+
+    <div class="container">
+      {{#if data}}
+
+        {{#if loading}}
+          <progress class="progress progress-info progress-animated" value="{{data.length}}" max="{{total}}">{{Math.floor(data.length/total*100)}}%</progress>
+          <h5 class="text-info text-xs-center">
+            <i class="fa fa-spinner fa-pulse"></i>
+            Loading... ({{data.length}} of {{total}})
+          </h5>
+        {{/if}}
+
+        <div class="table-responsive">
+          <table class="table table-sm table-striped table-bordered">
+            <thead class="thead-inverse">
+              <tr>
+                <th>Email</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each data}}
+                {{#if !search || (search && (first.startsWith(search.toLowerCase() || last.startsWith(search.toLowerCase()))))}}
+                  <tr>
+                    <td>{{email}}</td>
+                    <td class="text-capitalize {{#if search && (first.startsWith(search.toLowerCase()))}}font-weight-bold table-warning{{/if}}">{{first}}</td>
+                    <td class="text-capitalize {{#if search && (last.startsWith(search.toLowerCase()))}}font-weight-bold table-warning{{/if}}">{{last}}</td>
+                    <td>{{phone}}</td>
+                  </tr>
+                {{/if}}
+              {{/each}}
+            </tbody>
+            <tfoot class="thead-inverse">
+              <tr>
+                <th colspan="4">Total ({{total}} Results)</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      {{/if}}
+
+    </div>
+  </div>
+</div>
